@@ -1,0 +1,22 @@
+// Viewports
+
+$width-sm: 0px;
+$width-md: 1000px;
+$width-lg: 2000px;
+
+$viewports: (
+  sm: $width-sm,
+  md: $width-md,
+  lg: $width-lg,
+);
+
+
+// Fonts
+
+$font-family-sans: 'PT Sans', sans-serif;
+$font-family-serif: 'PT Serif', serif;
+$font-family-display: 'PT Sans Caption', sans-serif;
+
+$font-size-sm: 18px;
+$font-size-md: 18px;
+$font-size-lg: 27px;
