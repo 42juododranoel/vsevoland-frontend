@@ -15,12 +15,18 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  css: ['~/assets/css/main.scss'],
-  plugins: [],
+
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/sanity/module',
+  ],
+  css: ['@/assets/scss/main'],
+  plugins: ['~/plugins/api.js'],
   components: true,
-  buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', 'nuxt-lazy-load'],
-  axios: {},
-  build: {},
   telemetry: false,
+
+  sanity: {
+    projectId: 'g03uathm',
+    dataset: 'production',
+  },
 }

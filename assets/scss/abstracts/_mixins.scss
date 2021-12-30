@@ -1,0 +1,19 @@
+// Viewport-related shortcuts
+
+@mixin media-breakpoint-sm() {
+  @media (min-width: $width-sm) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-md() {
+  @media (min-width: $width-md) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-lg() {
+  @media (min-width: $width-lg) {
+    @content;
+  }
+}

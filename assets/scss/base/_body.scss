@@ -1,0 +1,16 @@
+body {
+  font-family: $font-family-serif;
+  line-height: 1.5;
+}
+
+@include media-breakpoint-md() {
+  body {
+    font-size: $font-size-sm;
+  }
+}
+
+@include media-breakpoint-lg() {
+  body {
+    font-size: $font-size-lg;
+  }
+}
