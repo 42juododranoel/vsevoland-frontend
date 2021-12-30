@@ -16,10 +16,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  buildModules: [
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/sanity/module',
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/sanity/module'],
   css: ['@/assets/scss/main'],
   plugins: ['~/plugins/api.js'],
   components: true,

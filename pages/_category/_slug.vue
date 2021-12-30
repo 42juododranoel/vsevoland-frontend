@@ -1,16 +1,15 @@
 <template>
   <div class="post">
-    <h1 class="page__title">
-      {{ post.title }}
-    </h1>
+    <Heading1 :content="post.title" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Heading1 from '~/components/typography/Heading1.vue'
 
 export default {
-  components: {},
+  components: { Heading1 },
   async fetch({ params: { slug }, store }) {
     await store.dispatch('post/GET_POST', { slug })
   },

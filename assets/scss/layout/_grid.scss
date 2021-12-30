@@ -18,14 +18,14 @@ $grid-column-count: 16;
   margin-right: 20px;
 }
 
-@include media-breakpoint-md() {
+@media (min-width: $width-md) {
   .container {
     margin-left: 5vw;
     margin-right: 5vw;
   }
 }
 
-@include media-breakpoint-lg() {
+@media (min-width: $width-lg) {
   .container {
     margin-left: 10vw;
     margin-right: 10vw;
@@ -36,10 +36,8 @@ $grid-column-count: 16;
 // Force cols and offs span all screen on sm
 // Example: col-8-md becomes same fullscreen as col-sm
 
-@include media-breakpoint-sm() {
-  [class^='col-'],
-  [class^='off-'] { grid-column: 1 / -1 }
-}
+[class^='col-'],
+[class^='off-'] { grid-column: 1 / -1 }
 
 
 // Generate col-NUMBER-VIEWPORT and off-NUMBER-VIEWPORT:
@@ -57,6 +55,5 @@ $grid-column-count: 16;
       .off-#{$span}#{$infix} { grid-column-start: $span + 1 }
       .col-#{$span}#{$infix} { grid-column-end: span $span }
     }
-
   }
 }
