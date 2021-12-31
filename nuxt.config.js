@@ -17,7 +17,7 @@ module.exports = {
   },
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/sanity/module'],
-  css: ['@/assets/scss/main'],
+  css: ['@/assets/scss/main', '@/assets/scss/custom'],
   plugins: ['~/plugins/api.js'],
   components: true,
   telemetry: false,

@@ -1,0 +1,14 @@
+.book--zeroism {
+  .p-wrapper {
+    margin-bottom: 45px!important;
+  }
+
+}
+
+@media (min-width: $width-lg) {
+  .book--zeroism {
+    .p-wrapper {
+      margin-bottom: 68px!important;
+    }
+  }
+}

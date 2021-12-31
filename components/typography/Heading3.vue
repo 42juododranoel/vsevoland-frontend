@@ -1,37 +1,37 @@
 <template>
-  <div class="p-wrapper">
-    <p>
+  <div class="h3-wrapper">
+    <h3>
       <slot />
-    </p>
+    </h3>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Paragraph',
+  name: 'Heading3',
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~/assets/scss/abstracts/_variables.scss';
 
-.p-wrapper {
-  margin-bottom: 18px;
+.h3-wrapper {
+  margin-bottom: 17px;
 
-  p {
+  h3 {
     font-size: $font-size-sm;
-    margin-top: -12px;
+    margin-top: -11px;
     margin-bottom: -7px;
   }
 }
 
 @media (min-width: $width-lg) {
-  .p-wrapper {
+  .h3-wrapper {
     margin-bottom: 27px;
 
-    p {
+    h3 {
       font-size: $font-size-lg;
-      margin-top: -18px;
+      margin-top: -17px;
       margin-bottom: -10px;
     }
   }

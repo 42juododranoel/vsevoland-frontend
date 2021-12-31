@@ -21,8 +21,8 @@ export default {
   name: 'Spread',
   props: {
     number: {
-      type: String,
-      default: '',
+      type: Number,
+      default: undefined,
     },
   },
 }
