@@ -17,22 +17,50 @@ export default {
 
 .p-wrapper {
   margin-bottom: 18px;
+  font-size: $font-size-sm;
+  line-height: $line-height-sm;
 
   p {
-    font-size: $font-size-sm;
     margin-top: -12px;
     margin-bottom: -7px;
+  }
+}
+
+.book {
+  .p-wrapper {
+    text-indent: 27px;
+  }
+
+  .page--with-leadin {
+    .p-wrapper:first-of-type {
+      text-indent: unset;
+    }
+  }
+
+  .page--with-initial {
+    .p-wrapper:first-of-type {
+      p::first-letter {
+        font-size: 150%;
+      }
+    }
   }
 }
 
 @media (min-width: $width-lg) {
   .p-wrapper {
     margin-bottom: 27px;
+    font-size: $font-size-lg;
+    line-height: $line-height-lg;
 
     p {
-      font-size: $font-size-lg;
       margin-top: -18px;
       margin-bottom: -10px;
+    }
+  }
+
+  .book {
+    .p-wrapper {
+      text-indent: 45px;
     }
   }
 }

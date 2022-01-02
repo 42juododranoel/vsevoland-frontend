@@ -1,6 +1,6 @@
 <template>
-  <div class="page">
-    <Content :blocks="content" />
+  <div class="page" :class="{ 'page--with-leadin': withLeadin, 'page--with-initial': withInitial }">
+    <Content :content="content" />
   </div>
 </template>
 
@@ -14,6 +14,14 @@ export default {
     content: {
       type: Array,
       required: true,
+    },
+    withLeadin: {
+      type: Boolean,
+      default: false,
+    },
+    withInitial: {
+      type: Boolean,
+      default: false,
     },
   },
 }

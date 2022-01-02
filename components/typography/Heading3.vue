@@ -17,9 +17,9 @@ export default {
 
 .h3-wrapper {
   margin-bottom: 17px;
+  font-size: $font-size-sm;
 
   h3 {
-    font-size: $font-size-sm;
     margin-top: -11px;
     margin-bottom: -7px;
   }
@@ -28,9 +28,9 @@ export default {
 @media (min-width: $width-lg) {
   .h3-wrapper {
     margin-bottom: 27px;
+    font-size: $font-size-lg;
 
     h3 {
-      font-size: $font-size-lg;
       margin-top: -17px;
       margin-bottom: -10px;
     }

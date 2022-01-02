@@ -1,12 +1,20 @@
 <template>
-  <div :class="`book--${book.slug.current}`">
+  <div class="book" :class="`book--${book.slug.current}`">
     <Spread
       v-for="(spread, spreadIndex) in book.spreads"
       :key="spreadIndex"
-      :number="spread.number"
+      :number="spreadIndex + 1"
     >
-      <Page v-if="spread.firstPage" :content="spread.firstPage.content" />
-      <Page v-if="spread.secondPage" :content="spread.secondPage.content" />
+      <Page
+        :content="spread.firstPage ? spread.firstPage.content : []"
+        :with-leadin="spread.firstPage ? spread.firstPage.withLeadin : false"
+        :with-initial="spread.firstPage ? spread.firstPage.withInitial : false"
+      />
+      <Page
+        :content="spread.secondPage ? spread.secondPage.content : []"
+        :with-leadin="spread.secondPage ? spread.secondPage.withLeadin : false"
+        :with-initial="spread.secondPage ? spread.secondPage.withInitial : false"
+      />
     </Spread>
   </div>
 </template>
