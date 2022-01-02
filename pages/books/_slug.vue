@@ -3,7 +3,7 @@
     <Spread
       v-for="(spread, spreadIndex) in book.spreads"
       :key="spreadIndex"
-      :number="spreadIndex + 1"
+      :number="spread.doHideNumber ? undefined : spreadIndex + 1"
     >
       <Page
         :content="spread.firstPage ? spread.firstPage.content : []"
