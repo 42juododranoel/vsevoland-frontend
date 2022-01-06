@@ -23,6 +23,8 @@ module.exports = {
   plugins: ['prettier', 'radar', 'unicorn', 'vuejs-accessibility'],
   // add your custom rules here
   rules: {
+    'vuejs-accessibility/alt-text': 'off',
+    'vue/html-self-closing': 'off',
     'vue/no-v-html': 'off',
     'vue-scoped-css/no-unused-selector': 'off',
     'vue-scoped-css/require-scoped': 'error',

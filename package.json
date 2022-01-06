@@ -25,6 +25,7 @@
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/sanity": "^0.10.0",
     "@sanity/client": "^2.21.7",
+    "@sanity/image-url": "^1.0.1",
     "@vue/test-utils": "^1.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.0.1",

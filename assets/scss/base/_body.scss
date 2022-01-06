@@ -1,16 +1,17 @@
 body {
   font-family: $font-family-serif;
-  line-height: 1.5;
 }
 
-@media (min-width: $width-md) {
+@media (min-width: $width-sm) {
   body {
     font-size: $font-size-sm;
+    line-height: $line-height-sm;
   }
 }
 
 @media (min-width: $width-lg) {
   body {
     font-size: $font-size-lg;
+    line-height: $line-height-lg;
   }
 }

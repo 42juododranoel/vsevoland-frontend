@@ -7,6 +7,7 @@ import { SanityContent } from '@nuxtjs/sanity/dist/components/sanity-content'
 import Heading3 from '~/components/typography/Heading3.vue'
 import Paragraph from '~/components/typography/Paragraph.vue'
 import LeadIn from '~/components/typography/LeadIn.vue'
+import Image from '~/components/typography/Image.vue'
 
 export default {
   name: 'Content',
@@ -20,6 +21,9 @@ export default {
   data() {
     return {
       serializers: {
+        types: {
+          image: Image,
+        },
         styles: {
           h3: Heading3,
           normal: Paragraph,
