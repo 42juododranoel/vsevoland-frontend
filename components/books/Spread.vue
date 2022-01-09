@@ -1,10 +1,10 @@
 <template>
-  <div class="spread spread--pages">
+  <div class="spread">
     <div class="spread__inner">
       <div class="spread__header" />
 
       <div class="spread__body">
-        <div class="spread__pages">
+        <div :class="isChapter ? 'spread__chapter' : 'spread__pages'">
           <slot />
         </div>
       </div>
@@ -24,6 +24,10 @@ export default {
       type: Number,
       default: undefined,
     },
+    isChapter: {
+      type: Boolean,
+      default: false,
+    },
   },
 }
 </script>
@@ -40,25 +44,25 @@ export default {
   }
 
   &__inner,
-  &__pages {
+  &__pages,
+  &__chapter {
     display: grid;
   }
 
-  &--pages {
+  &__pages {
     grid-template-rows: minmax(100vh, min-content);
   }
 
-  &--splash {
+  &__chapter {
     grid-template-rows: 100vh;
   }
-}
 
-.spread {
   &__inner {
     grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
   }
+
   &__pages,
-  &__splash {
+  &__chapter {
     grid-template-columns: 1fr;
   }
   &__footer {
@@ -75,7 +79,7 @@ export default {
     &__pages {
       grid-template-columns: 1fr 1fr;
     }
-    &__splash {
+    &__chapter {
       grid-template-columns: 1fr;
     }
     &__footer {

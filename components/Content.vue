@@ -1,5 +1,5 @@
 <template>
-  <SanityContent :blocks="content" :serializers="serializers" />
+  <SanityContent :blocks="blocks" :serializers="serializers" />
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
   name: 'Content',
   components: { SanityContent },
   props: {
-    content: {
+    blocks: {
       type: Array,
       required: true,
     },

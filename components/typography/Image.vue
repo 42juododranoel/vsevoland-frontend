@@ -23,3 +23,18 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~/assets/scss/abstracts/_variables.scss';
+
+figure {
+  display: flex;
+  margin-bottom: 36px;
+}
+
+@media (min-width: $width-lg) {
+  figure {
+    margin-bottom: 54px;
+  }
+}
+</style>
