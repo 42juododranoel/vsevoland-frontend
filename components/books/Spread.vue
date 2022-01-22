@@ -1,32 +1,69 @@
 <template>
   <div class="spread">
-    <div class="spread__inner">
-      <div class="spread__header" />
+    <div class="spread--header">
+      <div />
+    </div>
 
-      <div class="spread__body">
-        <div :class="isChapter ? 'spread__chapter' : 'spread__pages'">
-          <slot />
-        </div>
+    <div class="spread--body">
+      <div v-if="firstPage" class="spread--first-page">
+        <Page
+          :content="firstPage.content"
+          :with-leadin="firstPage.withLeadin"
+          :with-initial="firstPage.withInitial"
+        />
       </div>
+      <div v-if="firstImage" class="spread--first-image">
+        <Picture :asset="firstImage.asset" />
+      </div>
+      <div v-if="secondPage" class="spread--second-page">
+        <Page
+          :content="secondPage.content"
+          :with-leadin="secondPage.withLeadin"
+          :with-initial="secondPage.withInitial"
+        />
+      </div>
+      <div v-if="secondImage" class="spread--second-image">
+        <Picture :asset="secondImage.asset" />
+      </div>
+    </div>
 
-      <div class="spread__footer">
-        <span v-if="number" class="spread__number">{{ number }}</span>
-      </div>
+    <div class="spread--footer">
+      <div class="spread--index">{{ index }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import Page from '~/components/books/Page.vue'
+import Picture from '~/components/typography/Picture.vue'
+
 export default {
   name: 'Spread',
+  components: { Page, Picture },
   props: {
-    number: {
+    index: {
       type: Number,
+      required: true,
+    },
+    firstPage: {
+      type: Object,
+      required: false,
       default: undefined,
     },
-    isChapter: {
-      type: Boolean,
-      default: false,
+    secondPage: {
+      type: Object,
+      required: false,
+      default: undefined,
+    },
+    firstImage: {
+      type: Object,
+      required: false,
+      default: undefined,
+    },
+    secondImage: {
+      type: Object,
+      required: false,
+      default: undefined,
     },
   },
 }
@@ -37,54 +74,84 @@ export default {
 
 .spread {
   display: grid;
-  border-bottom: 1px solid #bebebe;
+  grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
+  grid-template-columns: 1fr;
 
-  &__number {
-    float: right;
-  }
-
-  &__inner,
-  &__pages,
-  &__chapter {
+  &--body {
     display: grid;
-  }
-
-  &__pages {
-    grid-template-rows: minmax(100vh, min-content);
-  }
-
-  &__chapter {
-    grid-template-rows: 100vh;
-  }
-
-  &__inner {
-    grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
-  }
-
-  &__pages,
-  &__chapter {
     grid-template-columns: 1fr;
+    padding-left: $spread-outer-padding-sm;
+    padding-right: $spread-outer-padding-sm;
   }
-  &__footer {
-    padding-left: $page-outer-padding-sm;
-    padding-right: $page-outer-padding-sm;
+
+  &--header {
+    padding-left: $spread-outer-padding-sm;
+    padding-right: $spread-outer-padding-sm;
+  }
+
+  &--footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding-left: $spread-outer-padding-sm;
+    padding-right: $spread-outer-padding-sm;
+  }
+
+  &--index {
+    text-align: right;
+  }
+
+  &--first-page,
+  &--first-image,
+  &--second-page,
+  &--second-image {
+    grid-column: 1;
+  }
+  &--first-page,
+  &--first-image {
+    grid-row: 1;
+  }
+  &--second-page,
+  &--second-image {
+    grid-row: 2;
+  }
+
+  &--first-image img,
+  &--second-image img {
+    position: sticky;
+    top: 5%;
   }
 }
 
 @media (min-width: $width-md) {
   .spread {
-    &__inner {
-      grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+    grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+
+    &--header {
+      padding-left: $spread-outer-padding-md;
+      padding-right: $spread-outer-padding-md;
     }
-    &__pages {
-      grid-template-columns: 1fr 1fr;
+
+    &--body {
+      grid-template-columns: 1fr $spread-inner-padding-md 1fr;
+      grid-template-rows: 1fr;
+      padding-left: $spread-outer-padding-md;
+      padding-right: $spread-outer-padding-md;
     }
-    &__chapter {
-      grid-template-columns: 1fr;
+
+    &--first-page,
+    &--first-image,
+    &--second-page,
+    &--second-image {
+      grid-row: 1;
     }
-    &__footer {
-      padding-left: $page-outer-padding-md;
-      padding-right: $page-outer-padding-md;
+    &--first-page,
+    &--first-image {
+      grid-column: 1;
+    }
+    &--second-page,
+    &--second-image {
+      grid-column: 3;
     }
   }
 }

@@ -29,6 +29,7 @@ module.exports = {
     'vue-scoped-css/no-unused-selector': 'off',
     'vue-scoped-css/require-scoped': 'error',
     'import/prefer-default-export': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
     'unicorn/filename-case': [
       'error',
       {

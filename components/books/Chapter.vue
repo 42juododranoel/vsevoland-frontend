@@ -1,30 +1,45 @@
 <template>
-  <div class="chapter" :style="{ backgroundImage: `url(${imageUrl})` }">
-    <div class="chapter__title">
-      <div class="chapter__title__prefix">
-        {{ titlePrefix }}
+  <div class="chapter">
+    <div class="chapter--header">
+      <div />
+    </div>
+
+    <div class="chapter--body">
+      <div class="chapter--title">
+        <span class="chapter--title-prefix">
+          {{ titlePrefix }}
+        </span>
+        <br />
+        <span class="chapter--title-content">
+          {{ title }}
+        </span>
       </div>
-      <div class="chapter__title__content">
-        {{ title }}
+
+      <div class="chapter--image">
+        <Picture :asset="image.asset" />
+      </div>
+
+      <div class="chapter--subtitle">
+        <span class="chapter--subtitle-prefix">или,</span>
+        <br />
+        <span class="chapter--subtitle-content">
+          <span class="chapter--subtitle-laquo">«</span>{{ subtitle }}<span>»</span>
+        </span>
       </div>
     </div>
-    <div class="chapter__subtitle-wrapper">
-      <div class="chapter__subtitle">
-        <div class="chapter__subtitle__prefix">или,</div>
-        <div class="chapter__subtitle__content">
-          <span class="chapter__subtitle__content__hanging-laquo">«</span>{{ subtitle
-          }}<span>»</span>
-        </div>
-      </div>
+
+    <div class="chapter--footer">
+      <div />
     </div>
   </div>
 </template>
 
 <script>
-import imageUrlBuilder from '@sanity/image-url'
+import Picture from '~/components/typography/Picture.vue'
 
 export default {
   name: 'Chapter',
+  components: { Picture },
   props: {
     title: {
       type: String,
@@ -47,10 +62,6 @@ export default {
     titlePrefix() {
       return `Глава ${this.number}.`
     },
-    imageUrl() {
-      const urlBuilder = imageUrlBuilder(this.$sanity.config)
-      return urlBuilder.image(this.image.asset).auto('format').url()
-    },
   },
 }
 </script>
@@ -59,64 +70,88 @@ export default {
 @import '~/assets/scss/abstracts/_variables.scss';
 
 .chapter {
-  grid-row: 1;
-  grid-column: 1;
-  font-family: $font-family-caption;
-  position: relative;
-  margin-left: $page-outer-padding-sm;
-  margin-right: $page-outer-padding-sm;
-  background-repeat: no-repeat;
-  background-position-x: center;
-  background-position-y: center;
-  background-size: contain;
+  display: grid;
+  grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
+  grid-template-columns: 1fr;
 
-  &__title {
-    &__prefix {
+  &--body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content max-content;
+    padding-left: $spread-outer-padding-sm;
+    padding-right: $spread-outer-padding-sm;
+    font-family: $font-family-caption;
+  }
+
+  &--header {
+    padding-left: $spread-outer-padding-sm;
+    padding-right: $spread-outer-padding-sm;
+  }
+
+  &--footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding-left: $spread-outer-padding-sm;
+    padding-right: $spread-outer-padding-sm;
+  }
+
+  &--title {
+    &-prefix {
       font-weight: normal;
       font-size: 36px;
       margin-bottom: 27px;
     }
-    &__content {
+
+    &-content {
       text-transform: uppercase;
       font-size: 81px;
+      line-height: 72px;
       font-weight: bold;
-      margin-left: -8px;
+      margin-left: 2px;
     }
   }
 
-  &__subtitle-wrapper {
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-
-  &__subtitle {
+  &--subtitle {
     font-style: italic;
     font-family: 'PT Serif';
     text-align: left;
     margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
-    &__prefix {
+    &-prefix {
       font-size: 27px;
       margin-bottom: 5px;
     }
 
-    &__content {
+    &-content {
       font-size: 54px;
       line-height: 45px;
+    }
 
-      &__hanging-laquo {
-        margin-left: -27px;
-      }
+    &-laquo {
+      margin-left: -27px;
     }
   }
 }
 
 @media (min-width: $width-md) {
   .chapter {
-    margin-left: $page-outer-padding-md;
-    margin-right: $page-outer-padding-md;
+    grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+
+    &--header {
+      padding-left: $spread-outer-padding-md;
+      padding-right: $spread-outer-padding-md;
+    }
+
+    &--body {
+      grid-template-rows: 1fr;
+      grid-template-columns: max-content auto max-content;
+      padding-left: $spread-outer-padding-md;
+      padding-right: $spread-outer-padding-md;
+    }
   }
 }
 </style>

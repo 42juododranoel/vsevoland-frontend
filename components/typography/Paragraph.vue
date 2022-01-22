@@ -31,13 +31,13 @@ export default {
     text-indent: 27px;
   }
 
-  .page--with-leadin {
+  .page_with-leadin {
     .p-wrapper:first-of-type {
       text-indent: unset;
     }
   }
 
-  .page--with-initial {
+  .page_with-initial {
     .p-wrapper:first-of-type {
       p::first-letter {
         font-size: 150%;
