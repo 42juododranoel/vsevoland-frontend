@@ -7,7 +7,7 @@ describe('queryGetBook', () => {
     const query = queryGetBook(parameters)
 
     expect(query).toEqual(
-      '*[_type == "book" && slug.current == "on-self"][0] {..., spreads[]{..., firstPage->, secondPage->}}'
+      '*[_type == "book" && slug.current == "on-self"][0] {..., nodes[]{..., firstPage->, secondPage->}}'
     )
   })
 })

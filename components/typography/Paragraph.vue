@@ -26,7 +26,13 @@ export default {
   }
 }
 
-.book {
+.layout_blog {
+  .p-wrapper + .p-wrapper {
+    margin-top: 36px;
+  }
+}
+
+.layout_book {
   .p-wrapper {
     text-indent: 27px;
   }
@@ -58,7 +64,7 @@ export default {
     }
   }
 
-  .book {
+  .layout_book {
     .p-wrapper {
       text-indent: 45px;
     }

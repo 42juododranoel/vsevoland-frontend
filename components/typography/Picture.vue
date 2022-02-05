@@ -1,5 +1,7 @@
 <template>
-  <img :src="imageUrl" />
+  <figure>
+    <img :src="imageUrl" />
+  </figure>
 </template>
 
 <script>
@@ -26,13 +28,13 @@ export default {
 @import '~/assets/scss/abstracts/_variables.scss';
 
 figure {
-  // display: flex;
-  // margin-bottom: 36px;
+  display: flex;
+  margin-bottom: 36px;
 }
 
 @media (min-width: $width-lg) {
   figure {
-    // margin-bottom: 54px;
+    margin-bottom: 54px;
   }
 }
 </style>

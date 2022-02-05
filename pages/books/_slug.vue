@@ -1,5 +1,5 @@
 <template>
-  <div class="book" :class="`book--${book.slug.current}`">
+  <div class="book" :class="`book_${book.slug.current}`">
     <Node
       v-for="(node, nodeIndex) in book.nodes"
       :key="nodeIndex"

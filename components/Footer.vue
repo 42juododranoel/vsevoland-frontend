@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div>Footer</div>
+    <div></div>
   </div>
 </template>
 

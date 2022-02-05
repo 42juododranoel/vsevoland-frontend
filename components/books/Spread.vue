@@ -119,7 +119,7 @@ export default {
   &--first-image img,
   &--second-image img {
     position: sticky;
-    top: 5%;
+    top: 0;
   }
 }
 

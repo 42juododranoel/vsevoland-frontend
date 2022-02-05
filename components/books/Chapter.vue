@@ -106,7 +106,7 @@ export default {
     &-content {
       text-transform: uppercase;
       font-size: 81px;
-      line-height: 72px;
+      line-height: 81px;
       font-weight: bold;
       margin-left: 2px;
     }
@@ -128,7 +128,7 @@ export default {
 
     &-content {
       font-size: 54px;
-      line-height: 45px;
+      line-height: 54px;
     }
 
     &-laquo {
@@ -148,7 +148,7 @@ export default {
 
     &--body {
       grid-template-rows: 1fr;
-      grid-template-columns: max-content auto max-content;
+      grid-template-columns: 25% auto 25%;
       padding-left: $spread-outer-padding-md;
       padding-right: $spread-outer-padding-md;
     }
