@@ -19,7 +19,7 @@ module.exports = {
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/sanity/module'],
   modules: [['nuxt-highlightjs', { style: 'stackoverflow-light' }]],
   css: ['@/assets/scss/main', '@/assets/scss/custom'],
-  plugins: ['~/plugins/api.js'],
+  plugins: ['~/plugins/api.js', '~/plugins/typographer.js'],
   components: true,
   telemetry: false,
 

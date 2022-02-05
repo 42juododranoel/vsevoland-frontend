@@ -1,6 +1,6 @@
 <template>
   <div class="h2-wrapper">
-    <h2>
+    <h2 v-typograph-content>
       <slot />
     </h2>
   </div>
@@ -16,6 +16,7 @@ export default {
 @import '~/assets/scss/abstracts/_variables.scss';
 
 .h2-wrapper {
+  display: flex;
   font-size: 36px;
   line-height: 45px;
   margin-bottom: 27px;

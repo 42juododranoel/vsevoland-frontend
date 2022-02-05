@@ -3,11 +3,15 @@
     <NuxtLink to="/">
       <img class="header--avatar" src="~/assets/images/me-circle.jpg" />
     </NuxtLink>
-    <span class="header--sections">
-      <span class="header--section"><Link target="/drawing">Рисование</Link></span>
-      <span class="header--section"><Link target="/writing">Писательство</Link></span>
-      <span class="header--section"><Link target="/fencing">Фехтование</Link></span>
-      <span class="header--section"><Link target="/programming">Программирование</Link></span>
+    <span class="header--content">
+      <span class="header--name">Всеволод Скрипник 💪(ФωФ💪</span>
+      <span class="header--sections">
+        <span class="header--section"><Link target="/development">Разработка</Link></span>
+        <span class="header--section"><Link target="/fitness">Фитнес</Link></span>
+        <span class="header--section"><Link target="/drawing">Рисование</Link></span>
+        <span class="header--section"><Link target="/writing">Писательство</Link></span>
+        <span class="header--section"><Link target="/fencing">Фехтование</Link></span>
+      </span>
     </span>
   </div>
 </template>
@@ -36,13 +40,35 @@ export default {
     height: auto;
   }
 
-  &--sections {
-    font-family: $font-family-caption;
+  &--content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
     padding-top: 5px;
+    font-family: $font-family-caption;
+  }
+
+  &--name {
+    padding-left: 5px;
+  }
+
+  &--sections {
+    display: flex;
+    flex-direction: column;
   }
 
   &--section {
-    padding-left: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
+@media (min-width: $width-md) {
+  .header {
+    &--sections {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 </style>

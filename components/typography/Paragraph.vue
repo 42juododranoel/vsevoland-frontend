@@ -1,6 +1,6 @@
 <template>
   <div class="p-wrapper">
-    <p>
+    <p v-typograph-content>
       <slot />
     </p>
   </div>
@@ -16,6 +16,7 @@ export default {
 @import '~/assets/scss/abstracts/_variables.scss';
 
 .p-wrapper {
+  display: flex;
   margin-bottom: 18px;
   font-size: $font-size-sm;
   line-height: $line-height-sm;

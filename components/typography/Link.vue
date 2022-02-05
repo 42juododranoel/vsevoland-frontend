@@ -1,7 +1,9 @@
 <template>
-  <span class="a-wrapper">
-    <span v-if="prefix" class="prefix">{{ prefix }}</span>
-    <NuxtLink class="link" :to="target"><slot /></NuxtLink>
+  <span class="link--wrapper">
+    <NuxtLink class="link--content" :to="target">
+      <span v-if="prefix" class="link--prefix">{{ prefix }}</span>
+      <span class="link--text"><slot></slot></span>
+    </NuxtLink>
   </span>
 </template>
 
@@ -24,29 +26,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$link-text-color: rgba(39, 101, 142, 1);
-$link-underline-color: rgba(39, 101, 142, 0.2);
-$link-text-color-active: rgba(141, 104, 82, 1);
-$link-underline-color-active: rgba(141, 104, 82, 0.8);
+.link--wrapper {
+  color: var(--link-text-color);
 
-.a-wrapper {
-  color: $link-text-color;
-
-  .prefix {
+  .link--prefix {
     float: left;
   }
 
-  .link {
+  .link--text {
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: $link-underline-color;
+    border-bottom-color: var(--link-underline-color);
   }
 
-  .link.nuxt-link-exact-active,
-  .link.nuxt-link-active {
-    color: $link-text-color-active;
-    font-weight: bold;
-    border-bottom-color: $link-underline-color-active;
+  .link--content {
+    &:hover {
+      color: var(--link-text-color-hover);
+
+      .link--text {
+        border-bottom-color: var(--link-underline-color-hover);
+      }
+    }
+
+    &.nuxt-link-exact-active,
+    &.nuxt-link-active {
+      color: var(--link-text-color-active);
+      font-weight: bold;
+
+      .link--text {
+        border-bottom-color: var(--link-underline-color-active);
+      }
+    }
   }
 }
 </style>

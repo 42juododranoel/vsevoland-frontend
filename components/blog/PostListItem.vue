@@ -1,6 +1,6 @@
 <template>
   <div class="post-list__item">
-    <NuxtLink :to="path">
+    <NuxtLink class="post-list__item--content" :to="path">
       <div class="post-list__item--title">
         <Heading2>{{ title }}</Heading2>
       </div>
@@ -68,7 +68,7 @@ export default {
 @import '~/assets/scss/abstracts/_variables.scss';
 
 .post-list__item {
-  padding-bottom: 45px;
+  padding-bottom: 54px;
 
   &--labels {
     display: flex;
@@ -83,7 +83,33 @@ export default {
     display: flex;
   }
 
-  &--label {
+  &--title {
+    padding-left: 10px;
+    margin-left: -13px;
+    border-left-style: solid;
+    border-left-width: 3px;
+    border-left-color: transparent;
+  }
+
+  &--title,
+  &--description {
+    transition: color 0.075s ease-in;
+    transition: border-left-color 0.075s ease-in;
+  }
+
+  &--content {
+    display: block;
+
+    &:hover {
+      .post-list__item--title {
+        border-left-color: var(--link-underline-color-hover);
+        color: var(--link-text-color-hover);
+      }
+
+      .post-list__item--description {
+        color: var(--text-color-hover);
+      }
+    }
   }
 }
 </style>
