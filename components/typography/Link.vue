@@ -3,6 +3,7 @@
     <NuxtLink class="link--content" :to="target">
       <span v-if="prefix" class="link--prefix">{{ prefix }}</span>
       <span class="link--text"><slot></slot></span>
+      <span v-if="postfix" class="link--postfix">{{ postfix }}</span>
     </NuxtLink>
   </span>
 </template>
@@ -17,6 +18,11 @@ export default {
       default: undefined,
     },
     prefix: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+    postfix: {
       type: String,
       required: false,
       default: undefined,
@@ -37,6 +43,7 @@ export default {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--link-underline-color);
+    float: left;
   }
 
   .link--content {

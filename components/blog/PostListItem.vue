@@ -8,23 +8,40 @@
         <Paragraph>{{ description }}</Paragraph>
       </div>
     </NuxtLink>
-    <span class="post-list__item--labels">
-      <span v-if="doShowCategory" class="post-list__item--category">
-        <Link prefix="#" :target="`/${category.slug.current}`">{{ category.title }}</Link>
-      </span>
-      <span v-for="(label, labelIndex) in labels" :key="labelIndex" class="post-list__item--label">
-        <Link prefix="#" :target="`/${category.slug.current}/${label.slug.current}`">{{
-          label.title
-        }}</Link>
-      </span>
-    </span>
+    <div class="post-list__item--meta">
+      <NuxtLink class="post-list__item--date" :to="path">
+        <span>{{ date }},</span>
+      </NuxtLink>
+      <Link
+        v-if="doShowCategory"
+        class="post-list__item--category"
+        prefix="#"
+        :postfix="labels ? ',' : undefined"
+        :target="`/${category.slug.current}`"
+      >
+        {{ category.title }}
+      </Link>
+      <Link
+        v-for="(label, labelIndex) in labels"
+        :key="labelIndex"
+        class="post-list__item--label"
+        prefix="#"
+        :postfix="labelIndex + 1 !== labels.length ? ',' : undefined"
+        :target="`/${category.slug.current}/labels/${label.slug.current}`"
+      >
+        {{ label.title }}
+      </Link>
+    </div>
   </div>
 </template>
 
 <script>
+import 'dayjs/locale/ru'
 import Link from '~/components/typography/Link.vue'
 import Heading2 from '~/components/typography/Heading2.vue'
 import Paragraph from '~/components/typography/Paragraph.vue'
+
+const dayjs = require('dayjs')
 
 export default {
   name: 'PostListItem',
@@ -50,7 +67,16 @@ export default {
       type: Array,
       required: true,
     },
+    publishedAt: {
+      type: String,
+      required: true,
+    },
     doShowCategory: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    isHovering: {
       type: Boolean,
       required: false,
       default: false,
@@ -60,6 +86,11 @@ export default {
     path() {
       return `/${this.category.slug.current}/${this.slug.current}`
     },
+    date() {
+      const publicationDate = dayjs(this.publishedAt).locale('ru')
+      const formatString = dayjs().year() === publicationDate.year() ? 'D MMMM' : 'D MMMM YYYY'
+      return publicationDate.format(formatString)
+    },
   },
 }
 </script>
@@ -68,47 +99,50 @@ export default {
 @import '~/assets/scss/abstracts/_variables.scss';
 
 .post-list__item {
-  padding-bottom: 54px;
+  padding-bottom: 63px;
 
-  &--labels {
+  &--meta {
     display: flex;
     flex-direction: row;
-    margin-top: -7px;
+    margin-top: -11px;
+    margin-bottom: -8px;
     font-family: $font-family-sans;
+  }
+
+  &--date,
+  &--label,
+  &--category {
+    padding-right: 5px;
+    display: flex;
   }
 
   &--label,
   &--category {
-    margin-right: 10px;
-    display: flex;
-  }
-
-  &--title {
-    padding-left: 10px;
-    margin-left: -13px;
-    border-left-style: solid;
-    border-left-width: 3px;
-    border-left-color: transparent;
+    padding-left: 5px;
   }
 
   &--title,
-  &--description {
+  &--description,
+  &--date {
     transition: color 0.075s ease-in;
-    transition: border-left-color 0.075s ease-in;
   }
 
   &--content {
     display: block;
+    padding-bottom: 27px;
 
-    &:hover {
-      .post-list__item--title {
-        border-left-color: var(--link-underline-color-hover);
-        color: var(--link-text-color-hover);
-      }
+    .p-wrapper {
+      margin-bottom: 0;
+    }
+  }
 
-      .post-list__item--description {
-        color: var(--text-color-hover);
-      }
+  &:hover {
+    cursor: pointer;
+
+    .post-list__item--title,
+    .post-list__item--description,
+    .post-list__item--date {
+      color: var(--text-color-hover);
     }
   }
 }

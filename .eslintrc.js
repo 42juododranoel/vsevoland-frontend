@@ -18,9 +18,8 @@ module.exports = {
     'airbnb-base',
     'prettier',
     'plugin:prettier/recommended',
-    'plugin:vuejs-accessibility/recommended',
   ],
-  plugins: ['prettier', 'radar', 'unicorn', 'vuejs-accessibility'],
+  plugins: ['prettier', 'radar', 'unicorn'],
   // add your custom rules here
   rules: {
     'vuejs-accessibility/alt-text': 'off',

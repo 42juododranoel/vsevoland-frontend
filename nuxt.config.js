@@ -27,4 +27,16 @@ module.exports = {
     projectId: 'g03uathm',
     dataset: 'production',
   },
+
+  // Router configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-router/
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'category-label',
+        path: '/:category/labels/:label',
+        props: (route) => ({ label: route.params.label }),
+        component: resolve(__dirname, 'pages/_category/index.vue'),
+      })
+    },
+  },
 }
