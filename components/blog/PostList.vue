@@ -2,8 +2,8 @@
   <div class="post-list">
     <div class="row">
       <div class="col-7-md">
-        <Heading1>{{ category.title }}</Heading1>
-        <div class="post-list--labels">
+        <Heading1 v-if="category">{{ category.title }}</Heading1>
+        <div v-if="labels" class="post-list--labels">
           <span class="post-list--labels-prefix">Рубрики:</span>
           <span class="post-list--labels-content">
             <Link
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div v-if="category.background" class="off-8-md col-8-md">
+      <div v-if="category && category.background" class="off-8-md col-8-md">
         <Picture :asset="category.background.asset" />
       </div>
     </div>
