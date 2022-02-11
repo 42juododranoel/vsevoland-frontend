@@ -26,6 +26,11 @@ export default {
       store.dispatch('labels/GET_LABELS', { category }),
     ])
   },
+  head() {
+    return {
+      title: `${this.category.title}. Всеволенд`,
+    }
+  },
   computed: {
     ...mapState('posts', { posts: 'posts' }),
     ...mapState('category', { category: 'category' }),

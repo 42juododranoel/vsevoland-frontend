@@ -17,6 +17,18 @@ export default {
   async fetch({ params: { slug }, store }) {
     await store.dispatch('post/GET_POST', { slug })
   },
+  head() {
+    return {
+      title: `${this.post.title}. Всеволенд`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.post.description,
+        },
+      ],
+    }
+  },
   computed: {
     ...mapState('post', { post: 'post' }),
   },

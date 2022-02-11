@@ -15,6 +15,11 @@ export default {
   async fetch({ store }) {
     await store.dispatch('posts/GET_POSTS', {})
   },
+  head() {
+    return {
+      title: `Блог Всеволода Скрипника — Всеволенд`,
+    }
+  },
   computed: {
     ...mapState('posts', { posts: 'posts' }),
   },
