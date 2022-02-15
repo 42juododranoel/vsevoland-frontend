@@ -6,22 +6,34 @@
     <span class="header--content">
       <span class="header--name">Всеволод Скрипник 💪(ФωФ💪</span>
       <span class="header--sections">
-        <span class="header--section"><Link target="/development">Разработка</Link></span>
-        <span class="header--section"><Link target="/fitness">Фитнес</Link></span>
-        <span class="header--section"><Link target="/drawing">Рисование</Link></span>
-        <span class="header--section"><Link target="/writing">Писательство</Link></span>
-        <span class="header--section"><Link target="/fencing">Фехтование</Link></span>
+        <span
+          v-for="(category, categoryIndex) in categories"
+          :key="categoryIndex"
+          class="header--section"
+        >
+          <Link :target="`/${category.slug.current}`">{{ category.title }}</Link>
+        </span>
       </span>
     </span>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import Link from '~/components/typography/Link.vue'
 
 export default {
   name: 'Header',
   components: { Link },
+  async fetch() {
+    await this.GET_CATEGORIES()
+  },
+  computed: {
+    ...mapState('categories', { categories: 'categories' }),
+  },
+  methods: {
+    ...mapActions('categories', ['GET_CATEGORIES']),
+  },
 }
 </script>
 
