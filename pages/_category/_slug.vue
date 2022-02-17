@@ -14,8 +14,12 @@ import Heading1 from '~/components/typography/Heading1.vue'
 
 export default {
   components: { Content, Heading1 },
-  async fetch({ params: { slug }, store }) {
-    await store.dispatch('post/GET_POST', { slug })
+  layout: 'blog',
+  async fetch({ params: { category, slug }, store }) {
+    await Promise.all([
+      store.dispatch('post/GET_POST', { slug }),
+      store.dispatch('category/GET_CATEGORY', { slug: category }),
+    ])
   },
   head() {
     return {
@@ -31,6 +35,7 @@ export default {
   },
   computed: {
     ...mapState('post', { post: 'post' }),
+    ...mapState('category', { category: 'category' }),
   },
 }
 </script>

@@ -10,8 +10,6 @@ export const mutations = {
 
 export const actions = {
   async GET_CATEGORIES({ commit }) {
-    // eslint-disable-next-line no-console
-    console.log('GET CATEGORIES')
     const categories = await this.$api.categories.get()
     commit('SET_CATEGORIES', categories)
     return categories

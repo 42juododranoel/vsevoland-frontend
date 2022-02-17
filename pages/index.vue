@@ -12,8 +12,12 @@ import PostList from '~/components/blog/PostList.vue'
 
 export default {
   components: { PostList },
+  layout: 'blog',
   async fetch({ store }) {
-    await store.dispatch('posts/GET_POSTS', {})
+    await Promise.all([
+      store.dispatch('posts/GET_POSTS', {}),
+      store.dispatch('category/RESET_CATEGORY'),
+    ])
   },
   head() {
     return {

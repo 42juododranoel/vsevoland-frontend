@@ -12,6 +12,7 @@ import PostList from '~/components/blog/PostList.vue'
 
 export default {
   components: { PostList },
+  layout: 'blog',
   props: {
     label: {
       type: String,

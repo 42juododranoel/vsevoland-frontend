@@ -1,5 +1,10 @@
+const DEFAULT_CATEGORY = {
+  name: 'Всеволод Скрипник',
+  emoji: '💪(ФωФ💪',
+}
+
 export const state = () => ({
-  category: undefined,
+  category: DEFAULT_CATEGORY,
 })
 
 export const mutations = {
@@ -11,6 +16,11 @@ export const mutations = {
 export const actions = {
   async GET_CATEGORY({ commit }, { slug } = {}) {
     const category = await this.$api.category.get({ slug })
+    commit('SET_CATEGORY', category)
+    return category
+  },
+  async RESET_CATEGORY({ commit }) {
+    const category = DEFAULT_CATEGORY
     commit('SET_CATEGORY', category)
     return category
   },

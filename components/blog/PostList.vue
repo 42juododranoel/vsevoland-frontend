@@ -12,7 +12,7 @@
               class="post-list--label"
               prefix="#"
               :postfix="labelIndex + 1 !== labels.length ? ',' : undefined"
-              :target="`/${category.slug.current}/labels/${label.slug.current}`"
+              :target="`/${label.category.slug.current}/labels/${label.slug.current}`"
             >
               {{ label.title }}
             </Link>

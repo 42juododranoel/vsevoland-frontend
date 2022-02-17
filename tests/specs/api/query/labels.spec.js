@@ -6,6 +6,8 @@ describe('queryGetLabels', () => {
 
     const query = queryGetLabels(parameters)
 
-    expect(query).toEqual('*[_type == "label" && category->slug.current == "coding"] {...}')
+    expect(query).toEqual(
+      '*[_type == "label" && category->slug.current == "coding"] {..., category->{...}}'
+    )
   })
 })

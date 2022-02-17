@@ -4,7 +4,10 @@
       <img class="header--avatar" src="~/assets/images/me-circle.jpg" />
     </NuxtLink>
     <span class="header--content">
-      <span class="header--name">Всеволод Скрипник 💪(ФωФ💪</span>
+      <span class="header--name-emoji">
+        <span class="header--name">{{ category.name }}</span>
+        <span class="header--emoji">{{ category.emoji }}</span>
+      </span>
       <span class="header--sections">
         <span
           v-for="(category, categoryIndex) in categories"
@@ -30,6 +33,7 @@ export default {
   },
   computed: {
     ...mapState('categories', { categories: 'categories' }),
+    ...mapState('category', { category: 'category' }),
   },
   methods: {
     ...mapActions('categories', ['GET_CATEGORIES']),
@@ -60,7 +64,7 @@ export default {
     font-family: $font-family-caption;
   }
 
-  &--name {
+  &--name-emoji {
     padding-left: 5px;
   }
 

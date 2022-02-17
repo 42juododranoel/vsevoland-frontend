@@ -5,7 +5,7 @@ describe('queryGetPosts', () => {
     const query = queryGetPosts()
 
     expect(query).toEqual(
-      '*[_type == "post"] {..., category->, labels[]->} | order(publishedAt desc)'
+      '*[_type == "post"] {..., category->, labels[]->{..., category->{...}}} | order(publishedAt desc)'
     )
   })
 
@@ -15,7 +15,7 @@ describe('queryGetPosts', () => {
     const query = queryGetPosts(parameters)
 
     expect(query).toEqual(
-      '*[_type == "post" && category->slug.current == "coding"] {..., category->, labels[]->} | order(publishedAt desc)'
+      '*[_type == "post" && category->slug.current == "coding"] {..., category->, labels[]->{..., category->{...}}} | order(publishedAt desc)'
     )
   })
 })

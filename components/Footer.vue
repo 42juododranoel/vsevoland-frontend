@@ -1,13 +1,20 @@
 <template>
   <div class="footer">
     <hr class="footer--hr" />
-    <span class="footer--emoji">💪(ФωФ💪</span>
+    <span class="footer--emoji">{{
+      category && category.emoji ? category.emoji : '💪(ФωФ💪'
+    }}</span>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Footer',
+  computed: {
+    ...mapState('category', { category: 'category' }),
+  },
 }
 </script>
 

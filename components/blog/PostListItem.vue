@@ -10,13 +10,13 @@
     </NuxtLink>
     <div class="post-list__item--meta">
       <NuxtLink class="post-list__item--date" :to="path">
-        <span>{{ date }},</span>
+        <span>{{ date }}<span v-if="doShowCategory">,</span></span>
       </NuxtLink>
       <Link
         v-if="doShowCategory"
         class="post-list__item--category"
         prefix="#"
-        :postfix="labels ? ',' : undefined"
+        :postfix="labels === undefined || labels.length == 0 ? undefined : ','"
         :target="`/${category.slug.current}`"
       >
         {{ category.title }}
