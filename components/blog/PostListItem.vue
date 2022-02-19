@@ -81,10 +81,15 @@ export default {
       required: false,
       default: false,
     },
+    redirect: {
+      type: String,
+      required: false,
+      default: '',
+    },
   },
   computed: {
     path() {
-      return `/${this.category.slug.current}/${this.slug.current}`
+      return this.redirect ? this.redirect : `/${this.category.slug.current}/${this.slug.current}`
     },
     date() {
       const publicationDate = dayjs(this.publishedAt).locale('ru')

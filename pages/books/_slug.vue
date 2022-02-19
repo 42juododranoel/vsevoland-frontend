@@ -27,6 +27,11 @@ export default {
   async fetch({ params: { slug }, store }) {
     await store.dispatch('book/GET_BOOK', { slug })
   },
+  head() {
+    return {
+      title: `${this.book.title}. Всеволенд`,
+    }
+  },
   computed: {
     ...mapState('book', { book: 'book' }),
   },

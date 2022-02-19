@@ -13,13 +13,13 @@ $grid-column-count: 16;
 
 // Let layout shrink webpage from left and right
 
-.layout {
+.layout_blog {
   margin-left: 20px;
   margin-right: 20px;
 }
 
 @media (min-width: $width-md) {
-  .layout {
+  .layout_blog {
     margin-left: 12vw;
     margin-right: 12vw;
   }

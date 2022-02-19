@@ -16,6 +16,7 @@
       :number="number"
     />
     <Volume v-else-if="type == 'volume'" :image="image" :title="title" />
+    <Cover v-else-if="type == 'cover'" :title="title" :subtitle="subtitle" />
     <div v-else>{{ type }}</div>
   </div>
 </template>
@@ -24,10 +25,11 @@
 import Volume from '~/components/books/Volume.vue'
 import Spread from '~/components/books/Spread.vue'
 import Chapter from '~/components/books/Chapter.vue'
+import Cover from '~/components/books/Cover.vue'
 
 export default {
   name: 'Node',
-  components: { Spread, Chapter, Volume },
+  components: { Spread, Chapter, Volume, Cover },
   props: {
     // Node props
     type: {
@@ -81,6 +83,7 @@ export default {
       default: undefined,
     },
     // Volume props are { title, image }
+    // Cover props are { title, subtitle }
   },
 }
 </script>

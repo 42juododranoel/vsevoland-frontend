@@ -28,6 +28,7 @@
               :category="post.category"
               :do-show-category="!category"
               :published-at="post.publishedAt"
+              :redirect="post.redirect"
             />
           </div>
         </div>
