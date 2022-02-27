@@ -1,12 +1,14 @@
 <template>
-  <img :src="imageUrl" />
+  <figure>
+    <img :src="imageUrl" />
+  </figure>
 </template>
 
 <script>
 import imageUrlBuilder from '@sanity/image-url'
 
 export default {
-  name: 'Picture',
+  name: 'Illustration',
   props: {
     asset: {
       type: Object,
@@ -24,4 +26,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/abstracts/_variables.scss';
+
+figure {
+  display: flex;
+  margin-bottom: 36px;
+}
+
+@media (min-width: $width-lg) {
+  figure {
+    margin-bottom: 54px;
+  }
+}
 </style>

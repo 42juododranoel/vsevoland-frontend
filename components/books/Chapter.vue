@@ -16,7 +16,7 @@
       </div>
 
       <div class="chapter--image">
-        <Picture :asset="image.asset" />
+        <Illustration v-if="image" :asset="image.asset" />
       </div>
 
       <div class="chapter--subtitle">
@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import Picture from '~/components/typography/Picture.vue'
+import Illustration from '~/components/typography/Illustration.vue'
 
 export default {
   name: 'Chapter',
-  components: { Picture },
+  components: { Illustration },
   props: {
     title: {
       type: String,

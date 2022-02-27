@@ -8,7 +8,7 @@ import Heading2 from '~/components/typography/Heading2.vue'
 import Heading3 from '~/components/typography/Heading3.vue'
 import Paragraph from '~/components/typography/Paragraph.vue'
 import LeadIn from '~/components/typography/LeadIn.vue'
-import Picture from '~/components/typography/Picture.vue'
+import Illustration from '~/components/typography/Illustration.vue'
 import Code from '~/components/embeds/Code.vue'
 
 export default {
@@ -24,7 +24,7 @@ export default {
     return {
       serializers: {
         types: {
-          image: Picture,
+          image: Illustration,
           code: Code,
         },
         styles: {

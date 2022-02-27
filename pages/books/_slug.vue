@@ -1,5 +1,13 @@
 <template>
-  <div class="book" :class="`book_${book.slug.current}`">
+  <div
+    class="book"
+    :class="`book_${book.slug.current}`"
+    :style="{
+      '--paper-color': book.paperColor,
+      '--text-color': book.textColor,
+      '--gradient-target': book.gradientTarget,
+    }"
+  >
     <Node
       v-for="(node, nodeIndex) in book.nodes"
       :key="nodeIndex"
@@ -11,6 +19,7 @@
       :second-image="node.secondImage"
       :title="node.title"
       :subtitle="node.subtitle"
+      :middle="node.middle"
       :number="node.number"
       :image="node.image"
     />
@@ -37,3 +46,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.book {
+  color: var(--text-color);
+}
+</style>

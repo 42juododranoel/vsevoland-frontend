@@ -1,22 +1,21 @@
 <template>
-  <div class="volume">
-    <div class="volume--header">
-      <div />
+  <div class="volume" :class="{ volume_centered: isCentered }">
+    <div class="volume-header-left" />
+    <div class="volume-body-left" />
+    <div class="volume-footer-left" />
+
+    <div class="volume-header-content" />
+
+    <div class="volume-body-content">
+      <h1 class="volume-title">{{ title }}</h1>
+      <Picture v-if="image" :asset="image.asset" />
     </div>
 
-    <div class="volume--body">
-      <div class="volume--title">
-        {{ title }}
-      </div>
+    <div class="volume-footer-content" />
 
-      <div class="volume--image">
-        <Picture :asset="image.asset" />
-      </div>
-    </div>
-
-    <div class="volume--footer">
-      <div />
-    </div>
+    <div class="volume-header-right" />
+    <div class="volume-body-right" />
+    <div class="volume-footer-right" />
   </div>
 </template>
 
@@ -24,16 +23,17 @@
 import Picture from '~/components/typography/Picture.vue'
 
 export default {
-  name: 'Chapter',
+  name: 'Cover',
   components: { Picture },
   props: {
     title: {
       type: String,
-      required: true,
+      default: '',
     },
     image: {
       type: Object,
-      required: true,
+      required: false,
+      default: undefined,
     },
   },
 }
@@ -44,57 +44,79 @@ export default {
 
 .volume {
   display: grid;
+  grid-template-columns: $spread-outer-padding-sm 1fr $spread-outer-padding-sm;
   grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
-  grid-template-columns: 1fr;
+  grid-template-areas:
+    'header-left header-content header-right'
+    'body-left body-content body-right'
+    'footer-left footer-content footer-right';
 
-  &--body {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: max-content max-content;
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
-    font-family: $font-family-caption;
+  &-header-left,
+  &-body-left,
+  &-footer-left {
+    background-image: linear-gradient(to left, var(--paper-color), var(--gradient-target));
+  }
+  &-header-left {
+    grid-area: header-left;
+  }
+  &-body-left {
+    grid-area: body-left;
+  }
+  &-footer-left {
+    grid-area: footer-left;
+  }
+
+  &-header-content,
+  &-body-content,
+  &-footer-content {
+    background-color: var(--paper-color);
+  }
+  &-header-content {
+    grid-area: header-content;
+  }
+  &-body-content {
+    grid-area: body-content;
     text-align: center;
+    overflow: hidden;
+  }
+  &-footer-content {
+    grid-area: footer-content;
   }
 
-  &--header {
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
+  &-header-right,
+  &-body-right,
+  &-footer-right {
+    background-image: linear-gradient(to right, var(--paper-color), var(--gradient-target));
+  }
+  &-header-right {
+    grid-area: header-right;
+  }
+  &-body-right {
+    grid-area: body-right;
+  }
+  &-footer-right {
+    grid-area: footer-right;
   }
 
-  &--footer {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
-  }
+  &-title {
+    line-height: 1.3;
 
-  &--title {
+    font-size: 54px;
+    letter-spacing: 9px;
     text-transform: uppercase;
-    font-size: 99px;
-    line-height: 126px;
-    font-weight: bold;
-    margin-bottom: 100px;
   }
 }
 
 @media (min-width: $width-md) {
   .volume {
     grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+    grid-template-columns: 30% 1fr 30%;
 
-    &--header {
-      padding-left: $spread-outer-padding-md;
-      padding-right: $spread-outer-padding-md;
-    }
-
-    &--body {
-      padding-left: $spread-outer-padding-md;
-      padding-right: $spread-outer-padding-md;
-    }
-
-    &--image img {
-      width: 60%;
+    &-title {
+      font-size: 90px;
+      text-transform: uppercase;
+      letter-spacing: 18px;
+      padding-bottom: 50px;
     }
   }
 }

@@ -21,10 +21,6 @@ export default {
     ...mapState('categories', { categories: 'categories' }),
     ...mapState('category', { category: 'category' }),
   },
-  updated() {
-    // eslint-disable-next-line no-console
-    console.log(this.$route)
-  },
   methods: {
     ...mapActions('categories', ['GET_CATEGORIES']),
   },

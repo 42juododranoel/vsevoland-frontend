@@ -34,7 +34,7 @@
         </div>
       </div>
       <div v-if="category && category.background" class="off-8-md col-8-md">
-        <Picture :asset="category.background.asset" />
+        <Illustration :asset="category.background.asset" />
       </div>
     </div>
   </div>
@@ -44,11 +44,11 @@
 import PostListItem from '~/components/blog/PostListItem.vue'
 import Heading1 from '~/components/typography/Heading1.vue'
 import Link from '~/components/typography/Link.vue'
-import Picture from '~/components/typography/Picture.vue'
+import Illustration from '~/components/typography/Illustration.vue'
 
 export default {
   name: 'PostList',
-  components: { PostListItem, Heading1, Link, Picture },
+  components: { PostListItem, Heading1, Link, Illustration },
   props: {
     posts: {
       type: Array,

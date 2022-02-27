@@ -1,45 +1,51 @@
 <template>
-  <div class="spread">
-    <div class="spread--header">
-      <div />
-    </div>
+  <div class="spread" :class="{ spread_centered: isCentered }">
+    <div class="spread-header-left" />
+    <div class="spread-body-left" />
+    <div class="spread-footer-left" />
 
-    <div class="spread--body">
-      <div v-if="firstPage" class="spread--first-page">
+    <div class="spread-header-content" />
+
+    <div class="spread-body-content">
+      <div v-if="firstPage" class="spread-first-page">
         <Page
           :content="firstPage.content"
           :with-leadin="firstPage.withLeadin"
           :with-initial="firstPage.withInitial"
         />
       </div>
-      <div v-if="firstImage" class="spread--first-image">
-        <Picture :asset="firstImage.asset" />
+      <div v-if="firstImage" class="spread-first-image">
+        <Illustration :asset="firstImage.asset" />
       </div>
-      <div v-if="secondPage" class="spread--second-page">
+      <div v-if="secondPage" class="spread-second-page">
         <Page
           :content="secondPage.content"
           :with-leadin="secondPage.withLeadin"
           :with-initial="secondPage.withInitial"
         />
       </div>
-      <div v-if="secondImage" class="spread--second-image">
-        <Picture :asset="secondImage.asset" />
+      <div v-if="secondImage" class="spread-second-image">
+        <Illustration :asset="secondImage.asset" />
       </div>
     </div>
 
-    <div class="spread--footer">
-      <div class="spread--index">{{ index }}</div>
+    <div class="spread-footer-content">
+      {{ index }}
     </div>
+
+    <div class="spread-header-right" />
+    <div class="spread-body-right" />
+    <div class="spread-footer-right" />
   </div>
 </template>
 
 <script>
 import Page from '~/components/books/Page.vue'
-import Picture from '~/components/typography/Picture.vue'
+import Illustration from '~/components/typography/Illustration.vue'
 
 export default {
   name: 'Spread',
-  components: { Page, Picture },
+  components: { Page, Illustration },
   props: {
     index: {
       type: Number,
@@ -66,6 +72,13 @@ export default {
       default: undefined,
     },
   },
+  data() {
+    return {
+      isCentered:
+        (this.firstPage && !(this.secondPage || this.secondImage)) ||
+        (this.secondPage && !(this.firstPage || this.firstImage)),
+    }
+  },
 }
 </script>
 
@@ -74,50 +87,78 @@ export default {
 
 .spread {
   display: grid;
+  grid-template-columns: $spread-outer-padding-sm 1fr $spread-outer-padding-sm;
   grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
-  grid-template-columns: 1fr;
+  grid-template-areas:
+    'header-left header-content header-right'
+    'body-left body-content body-right'
+    'footer-left footer-content footer-right';
 
-  &--body {
+  &-header-left,
+  &-body-left,
+  &-footer-left {
+    background-image: linear-gradient(to left, var(--paper-color), var(--gradient-target));
+  }
+  &-header-left {
+    grid-area: header-left;
+  }
+  &-body-left {
+    grid-area: body-left;
+  }
+  &-footer-left {
+    grid-area: footer-left;
+  }
+
+  &-header-content,
+  &-body-content,
+  &-footer-content {
+    background-color: var(--paper-color);
+  }
+  &-header-content {
+    grid-area: header-content;
+  }
+  &-body-content {
+    grid-area: body-content;
     display: grid;
     grid-template-columns: 1fr;
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
   }
-
-  &--header {
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
-  }
-
-  &--footer {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
-  }
-
-  &--index {
+  &-footer-content {
+    grid-area: footer-content;
     text-align: right;
   }
 
-  &--first-page,
-  &--first-image,
-  &--second-page,
-  &--second-image {
+  &-header-right,
+  &-body-right,
+  &-footer-right {
+    background-image: linear-gradient(to right, var(--paper-color), var(--gradient-target));
+  }
+  &-header-right {
+    grid-area: header-right;
+  }
+  &-body-right {
+    grid-area: body-right;
+  }
+  &-footer-right {
+    grid-area: footer-right;
+  }
+
+  &-first-page,
+  &-first-image,
+  &-second-page,
+  &-second-image {
     grid-column: 1;
   }
-  &--first-page,
-  &--first-image {
+  &-first-page,
+  &-first-image {
     grid-row: 1;
   }
-  &--second-page,
-  &--second-image {
+  &-second-page,
+  &-second-image {
     grid-row: 2;
   }
 
-  &--first-image img,
-  &--second-image img {
+  &-first-image img,
+  &-second-image img {
     position: sticky;
     top: 0;
   }
@@ -126,32 +167,34 @@ export default {
 @media (min-width: $width-md) {
   .spread {
     grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+    grid-template-columns: $spread-outer-padding-md 1fr $spread-outer-padding-md;
 
-    &--header {
-      padding-left: $spread-outer-padding-md;
-      padding-right: $spread-outer-padding-md;
-    }
-
-    &--body {
+    &-body-content {
       grid-template-columns: 1fr $spread-inner-padding-md 1fr;
       grid-template-rows: 1fr;
-      padding-left: $spread-outer-padding-md;
-      padding-right: $spread-outer-padding-md;
     }
 
-    &--first-page,
-    &--first-image,
-    &--second-page,
-    &--second-image {
+    &-first-page,
+    &-first-image,
+    &-second-page,
+    &-second-image {
       grid-row: 1;
     }
-    &--first-page,
-    &--first-image {
+    &-first-page,
+    &-first-image {
       grid-column: 1;
     }
-    &--second-page,
-    &--second-image {
+    &-second-page,
+    &-second-image {
       grid-column: 3;
+    }
+
+    &.spread_centered {
+      grid-template-columns: 30% 1fr 30%;
+
+      .spread-body-content {
+        grid-template-columns: 1fr;
+      }
     }
   }
 }

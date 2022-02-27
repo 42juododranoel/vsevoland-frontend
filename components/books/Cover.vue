@@ -1,16 +1,34 @@
 <template>
-  <div class="cover">
-    <h1 class="titles">
-      <div class="titles--title">{{ title }}</div>
-      <div class="titles--or">or,</div>
-      <div class="titles--subtitle">{{ subtitle }}</div>
-    </h1>
+  <div class="cover" :class="{ cover_centered: isCentered }">
+    <div class="cover-header-left" />
+    <div class="cover-body-left" />
+    <div class="cover-footer-left" />
+
+    <div class="cover-header-content" />
+
+    <div class="cover-body-content">
+      <h1 class="cover-titles">
+        <div class="cover-titles-title">{{ title }}</div>
+        <div v-if="middle" class="cover-titles-middle">{{ middle }}</div>
+        <div v-if="subtitle" class="cover-titles-subtitle">{{ subtitle }}</div>
+      </h1>
+      <Picture v-if="image" :asset="image.asset" />
+    </div>
+
+    <div class="cover-footer-content" />
+
+    <div class="cover-header-right" />
+    <div class="cover-body-right" />
+    <div class="cover-footer-right" />
   </div>
 </template>
 
 <script>
+import Picture from '~/components/typography/Picture.vue'
+
 export default {
   name: 'Cover',
+  components: { Picture },
   props: {
     title: {
       type: String,
@@ -20,36 +38,112 @@ export default {
       type: String,
       default: '',
     },
+    middle: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: Object,
+      required: false,
+      default: undefined,
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/abstracts/_variables.scss';
+
 .cover {
-  height: 100vh;
   display: grid;
-  border-bottom: 1px solid #bebebe;
+  grid-template-columns: $spread-outer-padding-sm 1fr $spread-outer-padding-sm;
+  grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
+  grid-template-areas:
+    'header-left header-content header-right'
+    'body-left body-content body-right'
+    'footer-left footer-content footer-right';
 
-  .titles {
+  &-header-left,
+  &-body-left,
+  &-footer-left {
+    background-image: linear-gradient(to left, var(--paper-color), var(--gradient-target));
+  }
+  &-header-left {
+    grid-area: header-left;
+  }
+  &-body-left {
+    grid-area: body-left;
+  }
+  &-footer-left {
+    grid-area: footer-left;
+  }
+
+  &-header-content,
+  &-body-content,
+  &-footer-content {
+    background-color: var(--paper-color);
+  }
+  &-header-content {
+    grid-area: header-content;
+  }
+  &-body-content {
+    grid-area: body-content;
     text-align: center;
-    margin: auto 0;
-    padding-bottom: 150px;
-    line-height: 1.5;
+    overflow: hidden;
+    align-self: center;
+  }
+  &-footer-content {
+    grid-area: footer-content;
+  }
 
-    .titles--title {
-      font-size: 144px;
+  &-header-right,
+  &-body-right,
+  &-footer-right {
+    background-image: linear-gradient(to right, var(--paper-color), var(--gradient-target));
+  }
+  &-header-right {
+    grid-area: header-right;
+  }
+  &-body-right {
+    grid-area: body-right;
+  }
+  &-footer-right {
+    grid-area: footer-right;
+  }
+
+  &-titles {
+    line-height: 1.3;
+    padding-bottom: 50px;
+
+    &-title {
+      font-size: 54px;
+      letter-spacing: 9px;
       text-transform: uppercase;
-      letter-spacing: 30px;
     }
 
-    .titles--or {
+    &-middle {
       font-size: 36px;
       padding-bottom: 10px;
     }
 
-    .titles--subtitle {
+    &-subtitle {
       font-size: 72px;
       font-style: italic;
+    }
+  }
+}
+
+@media (min-width: $width-md) {
+  .cover {
+    grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+    grid-template-columns: 30% 1fr 30%;
+
+    &-titles {
+      &-title {
+        font-size: 90px;
+        text-transform: uppercase;
+        letter-spacing: 18px;
+      }
     }
   }
 }

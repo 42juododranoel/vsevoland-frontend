@@ -15,8 +15,14 @@
       :subtitle="subtitle"
       :number="number"
     />
+    <Cover
+      v-else-if="type == 'cover'"
+      :title="title"
+      :subtitle="subtitle"
+      :image="image"
+      :middle="middle"
+    />
     <Volume v-else-if="type == 'volume'" :image="image" :title="title" />
-    <Cover v-else-if="type == 'cover'" :title="title" :subtitle="subtitle" />
     <div v-else>{{ type }}</div>
   </div>
 </template>
@@ -82,8 +88,13 @@ export default {
       required: false,
       default: undefined,
     },
+    // Cover props also have { title, subtitle, image }
+    middle: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
     // Volume props are { title, image }
-    // Cover props are { title, subtitle }
   },
 }
 </script>
