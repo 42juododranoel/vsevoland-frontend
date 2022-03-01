@@ -5,7 +5,8 @@
     :style="{
       '--paper-color': book.paperColor,
       '--text-color': book.textColor,
-      '--gradient-target': book.gradientTarget,
+      '--gradient-target-sm': book.paperColor,
+      '--gradient-target-md': book.gradientTarget,
     }"
   >
     <Node
@@ -48,7 +49,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/scss/abstracts/_variables.scss';
+
 .book {
   color: var(--text-color);
+  --gradient-target: var(--gradient-target-sm);
+}
+
+@media (min-width: $width-md) {
+  .book {
+    --gradient-target: var(--gradient-target-md);
+  }
 }
 </style>

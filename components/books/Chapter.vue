@@ -1,53 +1,47 @@
 <template>
-  <div class="chapter">
-    <div class="chapter--header">
-      <div />
-    </div>
+  <div class="chapter" :class="{ chapter_centered: isCentered }">
+    <div class="chapter-header-left" />
+    <div class="chapter-body-left" />
+    <div class="chapter-footer-left" />
 
-    <div class="chapter--body">
-      <div class="chapter--title">
-        <span class="chapter--title-prefix">
+    <div class="chapter-header-content" />
+
+    <div class="chapter-body-content">
+      <h1 class="chapter-title">
+        <span class="chapter-title-prefix">
           {{ titlePrefix }}
         </span>
         <br />
-        <span class="chapter--title-content">
+        <span class="chapter-title-content">
           {{ title }}
         </span>
-      </div>
-
-      <div class="chapter--image">
-        <Illustration v-if="image" :asset="image.asset" />
-      </div>
-
-      <div class="chapter--subtitle">
-        <span class="chapter--subtitle-prefix">или,</span>
-        <br />
-        <span class="chapter--subtitle-content">
-          <span class="chapter--subtitle-laquo">«</span>{{ subtitle }}<span>»</span>
-        </span>
-      </div>
+      </h1>
+      <h2 class="chapter-subtitle">{{ subtitle }}</h2>
+      <Picture v-if="image" :asset="image.asset" />
     </div>
 
-    <div class="chapter--footer">
-      <div />
-    </div>
+    <div class="chapter-footer-content" />
+
+    <div class="chapter-header-right" />
+    <div class="chapter-body-right" />
+    <div class="chapter-footer-right" />
   </div>
 </template>
 
 <script>
-import Illustration from '~/components/typography/Illustration.vue'
+import Picture from '~/components/typography/Picture.vue'
 
 export default {
-  name: 'Chapter',
-  components: { Illustration },
+  name: 'Cover',
+  components: { Picture },
   props: {
     title: {
       type: String,
-      required: true,
+      default: '',
     },
     subtitle: {
       type: String,
-      required: true,
+      default: '',
     },
     number: {
       type: Number,
@@ -55,7 +49,8 @@ export default {
     },
     image: {
       type: Object,
-      required: true,
+      required: false,
+      default: undefined,
     },
   },
   computed: {
@@ -71,86 +66,93 @@ export default {
 
 .chapter {
   display: grid;
+  grid-template-columns: $spread-outer-padding-sm 1fr $spread-outer-padding-sm;
   grid-template-rows: $spread-header-size-sm 1fr $spread-footer-size-sm;
-  grid-template-columns: 1fr;
+  grid-template-areas:
+    'header-left header-content header-right'
+    'body-left body-content body-right'
+    'footer-left footer-content footer-right';
 
-  &--body {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: max-content max-content max-content;
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
-    font-family: $font-family-caption;
+  &-header-left,
+  &-body-left,
+  &-footer-left {
+    background-image: linear-gradient(to left, var(--paper-color), var(--gradient-target));
+  }
+  &-header-left {
+    grid-area: header-left;
+  }
+  &-body-left {
+    grid-area: body-left;
+  }
+  &-footer-left {
+    grid-area: footer-left;
   }
 
-  &--header {
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
+  &-header-content,
+  &-body-content,
+  &-footer-content {
+    background-color: var(--paper-color);
+  }
+  &-header-content {
+    grid-area: header-content;
+  }
+  &-body-content {
+    grid-area: body-content;
+    text-align: center;
+    overflow: hidden;
+  }
+  &-footer-content {
+    grid-area: footer-content;
   }
 
-  &--footer {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    padding-left: $spread-outer-padding-sm;
-    padding-right: $spread-outer-padding-sm;
+  &-header-right,
+  &-body-right,
+  &-footer-right {
+    background-image: linear-gradient(to right, var(--paper-color), var(--gradient-target));
+  }
+  &-header-right {
+    grid-area: header-right;
+  }
+  &-body-right {
+    grid-area: body-right;
+  }
+  &-footer-right {
+    grid-area: footer-right;
   }
 
-  &--title {
-    &-prefix {
-      font-weight: normal;
-      font-size: 36px;
-      margin-bottom: 27px;
-    }
-
-    &-content {
-      text-transform: uppercase;
-      font-size: 81px;
-      line-height: 81px;
-      font-weight: bold;
-      margin-left: 2px;
-    }
+  &-title {
+    padding-bottom: 30px;
+    line-height: 1.3;
+    word-wrap: break-word;
   }
 
-  &--subtitle {
-    font-style: italic;
-    font-family: 'PT Serif';
-    text-align: left;
-    margin-left: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  &-title-prefix {
+    font-size: 36px;
+    letter-spacing: 5px;
+    text-transform: initial;
+  }
 
-    &-prefix {
-      font-size: 27px;
-      margin-bottom: 5px;
-    }
-
-    &-content {
-      font-size: 54px;
-      line-height: 54px;
-    }
-
-    &-laquo {
-      margin-left: -27px;
-    }
+  &-title-content {
+    font-size: 54px;
+    letter-spacing: 9px;
+    text-transform: uppercase;
   }
 }
 
 @media (min-width: $width-md) {
   .chapter {
     grid-template-rows: $spread-header-size-md 1fr $spread-footer-size-md;
+    grid-template-columns: 30% 1fr 30%;
 
-    &--header {
-      padding-left: $spread-outer-padding-md;
-      padding-right: $spread-outer-padding-md;
+    &-title-prefix {
+      font-size: 54px;
+      letter-spacing: 10px;
     }
 
-    &--body {
-      grid-template-rows: 1fr;
-      grid-template-columns: 25% auto 25%;
-      padding-left: $spread-outer-padding-md;
-      padding-right: $spread-outer-padding-md;
+    &-title-content {
+      font-size: 90px;
+      text-transform: uppercase;
+      letter-spacing: 18px;
     }
   }
 }

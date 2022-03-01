@@ -112,7 +112,7 @@ export default {
   }
 
   &-titles {
-    line-height: 1.3;
+    line-height: 1.4;
     padding-bottom: 50px;
 
     &-title {

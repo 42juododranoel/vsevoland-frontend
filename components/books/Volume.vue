@@ -100,7 +100,7 @@ export default {
 
   &-title {
     line-height: 1.3;
-
+    padding-bottom: 30px;
     font-size: 54px;
     letter-spacing: 9px;
     text-transform: uppercase;
